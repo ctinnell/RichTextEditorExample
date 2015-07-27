@@ -13,6 +13,7 @@
 		84D8F0671B66B6F800FD9765 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D8F0661B66B6F800FD9765 /* Images.xcassets */; };
 		84D8F06A1B66B6F800FD9765 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D8F0681B66B6F800FD9765 /* LaunchScreen.xib */; };
 		84D8F0761B66B6F800FD9765 /* RichTextExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8F0751B66B6F800FD9765 /* RichTextExampleTests.swift */; };
+		84D8F0801B66B8EE00FD9765 /* NoteEditorTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8F07F1B66B8EE00FD9765 /* NoteEditorTextViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		84D8F06F1B66B6F800FD9765 /* RichTextExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RichTextExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D8F0741B66B6F800FD9765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D8F0751B66B6F800FD9765 /* RichTextExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichTextExampleTests.swift; sourceTree = "<group>"; };
+		84D8F07F1B66B8EE00FD9765 /* NoteEditorTextViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteEditorTextViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				84D8F05F1B66B6F800FD9765 /* AppDelegate.swift */,
 				84D8F0611B66B6F800FD9765 /* ViewController.swift */,
 				84D8F0631B66B6F800FD9765 /* Main.storyboard */,
+				84D8F07F1B66B8EE00FD9765 /* NoteEditorTextViewDelegate.swift */,
 				84D8F0661B66B6F800FD9765 /* Images.xcassets */,
 				84D8F0681B66B6F800FD9765 /* LaunchScreen.xib */,
 				84D8F05D1B66B6F800FD9765 /* Supporting Files */,
@@ -214,6 +217,7 @@
 			files = (
 				84D8F0621B66B6F800FD9765 /* ViewController.swift in Sources */,
 				84D8F0601B66B6F800FD9765 /* AppDelegate.swift in Sources */,
+				84D8F0801B66B8EE00FD9765 /* NoteEditorTextViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
