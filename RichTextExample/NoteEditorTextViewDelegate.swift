@@ -11,6 +11,32 @@ import Foundation
 
 class NoteEditorTextViewDelegate: NSObject {
     
+    var maxTagLength = 0
+    var tags: [String] {
+        didSet {
+            maxTagLength = 0
+            for tag in tags {
+                let countWords = count(tag.componentsSeparatedByWhiteSpace())
+                maxTagLength = countWords > maxTagLength ? countWords : maxTagLength
+            }
+        }
+    }
+    
+    override init() {
+        tags = ["how are you", "you", "weather", "or cold"]
+    }
+    
+    func isStringATag(text: String) -> (Bool, Int) {
+        let tag = tags.filter({$0.lowercaseString == text})
+        let isTag = count(tag) > 0
+        var numberOfWords = 0
+        
+        if isTag {
+            let components = text.componentsSeparatedByWhiteSpace()
+            numberOfWords = count(components)
+        }
+        return (isTag,numberOfWords)
+    }
 }
 
 extension NoteEditorTextViewDelegate : UITextViewDelegate {
