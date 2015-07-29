@@ -45,9 +45,26 @@ func isStringATag(text: String) -> (Bool, Int) {
     return (isTag,numberOfWords)
 }
 
-tags = ["how are you", "you", "weather", "or cold"]
+tags = ["how are you", "you", "weather", "or cold", "how are you doing"]
 println(maxTagLength)
-println(isStringATag("how are you"))
+println(isStringATag("how are you doing today"))
 
 
 
+for (var outerCounter = 0; outerCounter<strArray.count; outerCounter++) {
+    let word = strArray[outerCounter]
+    let wordsRemaining = strArray.count - outerCounter
+    let numberOfWordsToConsider = (wordsRemaining >= maxTagLength) ? maxTagLength : wordsRemaining
+    //build list of words to consider
+    var wordsToConsider: [String] = []
+    for (var innerCounter = outerCounter; innerCounter<(outerCounter+numberOfWordsToConsider); innerCounter++) {
+        wordsToConsider.append(strArray[innerCounter])
+    }
+    
+    println(wordsToConsider)
+//    for (var innerCounter = 0; innerCounter<numberOfWordsToConsider; innerCounter++) {
+//        
+//        let (isTag, tagLength) =
+//    }
+    
+}
