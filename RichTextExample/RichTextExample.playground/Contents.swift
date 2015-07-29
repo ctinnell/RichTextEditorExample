@@ -3,7 +3,6 @@
 import UIKit
 import Foundation
 
-var str = "Hello, playground, how are you doing today? Is the weather nice, hot, or cold?"
 
 func stripSpecialCharacters(text: String) -> String {
     return " ".join(text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet)).lowercaseString
@@ -18,6 +17,7 @@ func trimExtraWhiteSpace(text: String) -> String {
 }
 
 var maxTagLength = 0
+var tagMatches: [String] = []
 var tags: [String]? {
     didSet {
         maxTagLength = 0
@@ -28,11 +28,9 @@ var tags: [String]? {
     }
 }
 
+var str = "Hello, playground, how are you doing today? Is the weather nice, hot, or cold?"
+tags = ["how are you", "you", "weather", "how are you doing", "Hello"]
 
-
-let strArray = componentsSeparatedByWhiteSpace(trimExtraWhiteSpace(stripSpecialCharacters(str)))
-
-//new
 func isStringATag(text: String) -> (Bool, Int) {
     let tag = tags!.filter({$0.lowercaseString == text})
     let isTag = count(tag) > 0
@@ -45,12 +43,11 @@ func isStringATag(text: String) -> (Bool, Int) {
     return (isTag,numberOfWords)
 }
 
-tags = ["how are you", "you", "weather", "or cold", "how are you doing"]
+
 println(maxTagLength)
-println(isStringATag("how are you doing today"))
 
-
-
+let strArray = componentsSeparatedByWhiteSpace(trimExtraWhiteSpace(stripSpecialCharacters(str)))
+tagMatches = []
 for (var outerCounter = 0; outerCounter<strArray.count; outerCounter++) {
     let word = strArray[outerCounter]
     let wordsRemaining = strArray.count - outerCounter
@@ -62,9 +59,46 @@ for (var outerCounter = 0; outerCounter<strArray.count; outerCounter++) {
     }
     
     println(wordsToConsider)
-//    for (var innerCounter = 0; innerCounter<numberOfWordsToConsider; innerCounter++) {
-//        
-//        let (isTag, tagLength) =
-//    }
     
+    var y = 0
+    while wordsToConsider.count > 0 {
+        let (isTag, wordCount) = isStringATag(" ".join(wordsToConsider))
+        if isTag {
+            tagMatches.append(" ".join(wordsToConsider))
+            wordsToConsider.removeAll(keepCapacity: false)
+            outerCounter = outerCounter + wordCount - 1
+        }
+        else {
+            wordsToConsider.removeLast()
+            y++
+        }
+    }
 }
+
+let finalMatches = tagMatches
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
