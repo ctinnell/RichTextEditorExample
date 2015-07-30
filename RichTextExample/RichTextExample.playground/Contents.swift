@@ -4,16 +4,25 @@ import UIKit
 import Foundation
 
 
-func stripSpecialCharacters(text: String) -> String {
-    return " ".join(text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet)).lowercaseString
-}
-
-func componentsSeparatedByWhiteSpace(text: String) -> [String] {
-    return text.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-}
-
-func trimExtraWhiteSpace(text: String) -> String {
-    return " ".join(componentsSeparatedByWhiteSpace(text).filter({!$0.isEmpty}))
+extension String {
+    func isAWordTerminator() -> Bool {
+        return self == " " || self == "." || self == "," || self == ":" || self == ";" || self == "\n" || self == "!" || self == "?"
+    }
+    
+    func stripSpecialCharacters() -> String {
+        return " ".join(self.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet)).lowercaseString
+    }
+    
+    func componentsSeparatedByWhiteSpace() -> [String] {
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+    
+    func trimExtraWhiteSpace() -> String {
+        return " ".join(self.componentsSeparatedByWhiteSpace().filter({!$0.isEmpty}))
+    }
+    
+    
+    
 }
 
 var maxTagLength = 0
@@ -22,7 +31,7 @@ var tags: [String]? {
     didSet {
         maxTagLength = 0
         for tag in tags! {
-            let countWords = count(componentsSeparatedByWhiteSpace(tag))
+            let countWords = tag.componentsSeparatedByWhiteSpace().count
             maxTagLength = countWords > maxTagLength ? countWords : maxTagLength
         }
     }
@@ -37,7 +46,7 @@ func isStringATag(text: String) -> (Bool, Int) {
     var numberOfWords = 0
     
     if isTag {
-        let components = componentsSeparatedByWhiteSpace(text)
+        let components = text.componentsSeparatedByWhiteSpace()
         numberOfWords = count(components)
     }
     return (isTag,numberOfWords)
@@ -46,7 +55,8 @@ func isStringATag(text: String) -> (Bool, Int) {
 
 println(maxTagLength)
 
-let strArray = componentsSeparatedByWhiteSpace(trimExtraWhiteSpace(stripSpecialCharacters(str)))
+
+let strArray = str.stripSpecialCharacters().trimExtraWhiteSpace().componentsSeparatedByWhiteSpace()
 tagMatches = []
 for (var outerCounter = 0; outerCounter<strArray.count; outerCounter++) {
     let word = strArray[outerCounter]
@@ -76,6 +86,7 @@ for (var outerCounter = 0; outerCounter<strArray.count; outerCounter++) {
 }
 
 let finalMatches = tagMatches
+
 
 
 
