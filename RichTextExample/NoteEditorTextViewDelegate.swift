@@ -13,6 +13,7 @@ class NoteEditorTextViewDelegate: NSObject {
     
     var maxTagLength = 0
     var tagParser: TagParser?
+    
     @IBOutlet var textView: UITextView!
     
     // inHighlightMode forces an additional call to formatTextView in order to turn off the tag highlighting.
@@ -23,6 +24,8 @@ class NoteEditorTextViewDelegate: NSObject {
     }
     
     private func formatTextView(tagList:[String]) {
+        let cursorLocation = textView.selectedRange
+
         let lowercaseText = textView.text.lowercaseString
         var attributedText = NSMutableAttributedString(string: textView.text)
         
@@ -46,6 +49,10 @@ class NoteEditorTextViewDelegate: NSObject {
             }
         }
         textView.attributedText = attributedText
+
+        //This is necessary, because cursor position is sent to end of document when editing in the middle of the text field
+        //as a side-effect of setting attributed text.
+        textView.selectedRange = cursorLocation
     }
     
     func formatTextView() {
@@ -54,19 +61,16 @@ class NoteEditorTextViewDelegate: NSObject {
                 println(tags)
                 formatTextView(tags)
         }
+        else {
+            formatTextView([])
+        }
     }
 }
 
 extension NoteEditorTextViewDelegate : UITextViewDelegate {
-    
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
-        if text.isAWordTerminator() || inHighlightMode {
-            formatTextView()
- //           if text == " " { inHighlightMode = true } // this checks to see if last character was a backspace...
-        }
-        return true
+    func textViewDidChange(textView: UITextView) {
+        formatTextView()
     }
-
 }
 
 
