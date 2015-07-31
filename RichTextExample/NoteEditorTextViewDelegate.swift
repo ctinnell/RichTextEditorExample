@@ -16,9 +16,6 @@ class NoteEditorTextViewDelegate: NSObject {
     
     @IBOutlet var textView: UITextView!
     
-    // inHighlightMode forces an additional call to formatTextView in order to turn off the tag highlighting.
-    var inHighlightMode = false
-    
     override init() {
         self.tagParser = TagParser(tags: ["sunny", "day", "the weather", "happy", "how are you"])
     }
@@ -29,7 +26,6 @@ class NoteEditorTextViewDelegate: NSObject {
         let lowercaseText = textView.text.lowercaseString
         var attributedText = NSMutableAttributedString(string: textView.text)
         
-        inHighlightMode = false
         for tag in tagList {
             var range = NSRange(location: 0, length: attributedText.length)
             while (range.location != NSNotFound) {
@@ -40,10 +36,7 @@ class NoteEditorTextViewDelegate: NSObject {
                                                   NSBackgroundColorAttributeName: UIColor.yellowColor(),
                                                              NSFontAttributeName: textView.font,
                                                    NSUnderlineStyleAttributeName: 1], range: range)
-                    
-                    // we are in highlight mode if the last word is a tag
-                    if range.location + range.length == attributedText.length { inHighlightMode = true } else { inHighlightMode = false }
-                        
+                                            
                     range = NSRange(location: range.location + range.length, length: attributedText.length - (range.location + range.length))
                 }
             }
@@ -58,8 +51,7 @@ class NoteEditorTextViewDelegate: NSObject {
     func formatTextView() {
         if let tagParser = tagParser,
             tags = tagParser.parseTags(textView.text) {
-                println(tags)
-                formatTextView(tags)
+                 formatTextView(tags)
         }
         else {
             formatTextView([])

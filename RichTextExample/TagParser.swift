@@ -58,8 +58,6 @@ class TagParser: NSObject {
                 wordsToConsider.append(strArray[innerCounter])
             }
             
-            //println(wordsToConsider)
-            
             var y = 0
             while wordsToConsider.count > 0 {
                 let (isTag, wordCount) = isStringATag(" ".join(wordsToConsider))
