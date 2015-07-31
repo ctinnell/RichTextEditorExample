@@ -85,7 +85,7 @@ class TagParser: NSObject {
 
 extension String {
     func isAWordTerminator() -> Bool {
-        return self == " " || self == "." || self == "," || self == ":" || self == ";" || self == "\n" || self == "!" || self == "?"
+        return self == " " || self == "." || self == "," || self == ":" || self == ";" || self == "\n" || self == "!" || self == "?" || self == ""
     }
     
     func stripSpecialCharacters() -> String {
