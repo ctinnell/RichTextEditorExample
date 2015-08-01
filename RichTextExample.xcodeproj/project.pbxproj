@@ -29,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		84BCEF541B6A62FE00ACD3B1 /* TagParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagParser.swift; sourceTree = "<group>"; };
+		84C8A3521B6D0A1900BAE0EF /* RichTextExample.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RichTextExample.playground; sourceTree = "<group>"; };
 		84D8F05A1B66B6F800FD9765 /* RichTextExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RichTextExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D8F05E1B66B6F800FD9765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D8F05F1B66B6F800FD9765 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		84D8F05C1B66B6F800FD9765 /* RichTextExample */ = {
 			isa = PBXGroup;
 			children = (
+				84C8A3521B6D0A1900BAE0EF /* RichTextExample.playground */,
 				84D8F05F1B66B6F800FD9765 /* AppDelegate.swift */,
 				84D8F0611B66B6F800FD9765 /* ViewController.swift */,
 				84D8F0631B66B6F800FD9765 /* Main.storyboard */,

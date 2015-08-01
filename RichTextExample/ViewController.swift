@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var tagListTextField: UITextField!
     @IBOutlet var noteEditorTextFieldDelegate: NoteEditorTextViewDelegate!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tagListTextField.addTarget(self, action: "tagTextFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
@@ -22,11 +21,6 @@ class ViewController: UIViewController {
             tagListTextField.text = ",".join(tagParser.tags)
         }
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tagTextFieldChanged(sender:UITextField) {
@@ -36,16 +30,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
-//extension ViewController : UITextFieldDelegate {
-//    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-//        if textField == tagListTextField {
-//            if let tagParser = noteEditorTextFieldDelegate.tagParser {
-//                tagParser.tags = tagListTextField.text.componentsSeparatedByString(",")
-//                noteEditorTextFieldDelegate.formatTextView()
-//            }
-//        }
-//        return true
-//    }
-//}
-

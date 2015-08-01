@@ -1,5 +1,3 @@
-//: Playground - noun: a place where people can play
-
 import UIKit
 import Foundation
 
@@ -20,9 +18,6 @@ extension String {
     func trimExtraWhiteSpace() -> String {
         return " ".join(self.componentsSeparatedByWhiteSpace().filter({!$0.isEmpty}))
     }
-    
-    
-    
 }
 
 var maxTagLength = 0
