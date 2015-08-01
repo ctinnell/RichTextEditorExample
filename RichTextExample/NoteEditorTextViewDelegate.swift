@@ -49,13 +49,11 @@ class NoteEditorTextViewDelegate: NSObject {
     }
     
     func formatTextView() {
-        if let tagParser = tagParser,
-            tags = tagParser.parseTags(textView.text) {
-                 formatTextView(tags)
+        var tagMatches: [String] = []
+        if let tagParser = tagParser {
+            tagMatches = tagParser.parseTags(textView.text)
         }
-        else {
-            formatTextView([])
-        }
+        formatTextView(tagMatches)
     }
 }
 

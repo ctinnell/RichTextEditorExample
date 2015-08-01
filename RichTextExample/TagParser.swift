@@ -41,10 +41,10 @@ class TagParser: NSObject {
         return (isTag,numberOfWords)
     }
     
-    func parseTags(text: String) -> [String]? {
+    func parseTags(text: String) -> [String] {
         if maxTagLength == 0 { configureMaxTagLength() } //annoyance with didSet not called in init
 
-        var matchedTags: [String]?
+        var matchedTags: [String] = []
         
         let strArray = text.stripSpecialCharacters().trimExtraWhiteSpace().componentsSeparatedByWhiteSpace()
         var tagMatches: [String] = []
