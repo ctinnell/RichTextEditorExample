@@ -61,9 +61,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8440EBDF1B6FDD12004A1376 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
 		84D8F0511B66B6F800FD9765 = {
 			isa = PBXGroup;
 			children = (
+				8440EBDF1B6FDD12004A1376 /* Documentation */,
 				84D8F05C1B66B6F800FD9765 /* RichTextExample */,
 				84D8F0721B66B6F800FD9765 /* RichTextExampleTests */,
 				84D8F05B1B66B6F800FD9765 /* Products */,
