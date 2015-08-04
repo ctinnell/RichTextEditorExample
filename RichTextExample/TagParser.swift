@@ -79,6 +79,22 @@ class TagParser: NSObject {
         
         return matchedTags
     }
+    
+    func rangesForTagsInText(tagList: [String], text: String) -> [NSRange] {
+        var ranges: [NSRange] = []
+        for tag in tagList {
+            var range = NSRange(location: 0, length: count(text))
+            while (range.location != NSNotFound) {
+                let tagPattern = "\\b\(tag)\\b" //regular expression - word boundary of tag
+                range = (text.lowercaseString as NSString).rangeOfString(tagPattern, options: .RegularExpressionSearch, range: range)
+                if (range.location != NSNotFound) {
+                    ranges.append(range)
+                    range = NSRange(location: range.location + range.length, length: count(text) - (range.location + range.length))
+                }
+            }
+        }
+        return ranges
+    }
 }
 
 extension String {

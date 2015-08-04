@@ -26,19 +26,12 @@ class NoteEditorTextViewDelegate: NSObject {
         let lowercaseText = textView.text.lowercaseString
         var attributedText = NSMutableAttributedString(string: textView.text)
         
-        for tag in tagList {
-            var range = NSRange(location: 0, length: attributedText.length)
-            while (range.location != NSNotFound) {
-                let tagPattern = "\\b\(tag)\\b" //regular expression - word boundary of tag
-                range = (lowercaseText as NSString).rangeOfString(tagPattern, options: .RegularExpressionSearch, range: range)
-                if (range.location != NSNotFound) {
-                    attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blueColor(),
-                                                  NSBackgroundColorAttributeName: UIColor.yellowColor(),
-                                                             NSFontAttributeName: textView.font,
-                                                   NSUnderlineStyleAttributeName: 1], range: range)
-                                            
-                    range = NSRange(location: range.location + range.length, length: attributedText.length - (range.location + range.length))
-                }
+        if let tagRanges = tagParser?.rangesForTagsInText(tagList, text: textView.text) {
+            for range in tagRanges {
+                attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blueColor(),
+                    NSBackgroundColorAttributeName: UIColor.yellowColor(),
+                    NSFontAttributeName: textView.font,
+                    NSUnderlineStyleAttributeName: 1], range: range)
             }
         }
         textView.attributedText = attributedText
