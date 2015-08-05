@@ -41,7 +41,7 @@ class TagParser: NSObject {
         return (isTag,numberOfWords)
     }
     
-    func parseTags(text: String) -> [String] {
+    private func matchedTags(text: String) -> [String] {
         if maxTagLength == 0 { configureMaxTagLength() } //annoyance with didSet not called in init
 
         var matchedTags: [String] = []
@@ -80,7 +80,7 @@ class TagParser: NSObject {
         return matchedTags
     }
     
-    func rangesForTagsInText(tagList: [String], text: String) -> [NSRange] {
+    private func locationForTagsInText(tagList: [String], text: String) -> [NSRange] {
         var ranges: [NSRange] = []
         for tag in tagList {
             var range = NSRange(location: 0, length: count(text))
@@ -94,6 +94,12 @@ class TagParser: NSObject {
             }
         }
         return ranges
+    }
+    
+    func parseTags(text: String) -> ([String], [NSRange]) {
+        let matchedTags = self.matchedTags(text)
+        let tagLocations = self.locationForTagsInText(matchedTags, text: text)
+        return (matchedTags, tagLocations)
     }
 }
 

@@ -20,33 +20,27 @@ class NoteEditorTextViewDelegate: NSObject {
         self.tagParser = TagParser(tags: ["sunny", "day", "the weather", "happy", "how are you"])
     }
     
-    private func formatTextView(tagList:[String]) {
+    func formatTextView() {
         let cursorLocation = textView.selectedRange
 
         let lowercaseText = textView.text.lowercaseString
         var attributedText = NSMutableAttributedString(string: textView.text)
         
-        if let tagRanges = tagParser?.rangesForTagsInText(tagList, text: textView.text) {
-            for range in tagRanges {
+        if let tagParser = tagParser {
+            let (tags, locations) = tagParser.parseTags(textView.text)
+            for location in locations {
                 attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blueColor(),
                     NSBackgroundColorAttributeName: UIColor.yellowColor(),
                     NSFontAttributeName: textView.font,
-                    NSUnderlineStyleAttributeName: 1], range: range)
+                    NSUnderlineStyleAttributeName: 1], range: location)
             }
         }
+        
         textView.attributedText = attributedText
 
         //This is necessary, because cursor position is sent to end of document when editing in the middle of the text field
         //as a side-effect of setting attributed text.
         textView.selectedRange = cursorLocation
-    }
-    
-    func formatTextView() {
-        var tagMatches: [String] = []
-        if let tagParser = tagParser {
-            tagMatches = tagParser.parseTags(textView.text)
-        }
-        formatTextView(tagMatches)
     }
 }
 
