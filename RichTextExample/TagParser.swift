@@ -31,12 +31,12 @@ class TagParser: NSObject {
     
     private func isStringATag(text: String) -> (Bool, Int) {
         let tag = tags.filter({$0.lowercaseString == text})
-        let isTag = count(tag) > 0
+        let isTag = tag.count > 0
         var numberOfWords = 0
         
         if isTag {
             let components = text.componentsSeparatedByWhiteSpace()
-            numberOfWords = count(components)
+            numberOfWords = components.count
         }
         return (isTag,numberOfWords)
     }
@@ -60,9 +60,9 @@ class TagParser: NSObject {
             
             var y = 0
             while wordsToConsider.count > 0 {
-                let (isTag, wordCount) = isStringATag(" ".join(wordsToConsider))
+                let (isTag, wordCount) = isStringATag(wordsToConsider.joinWithSeparator(" "))
                 if isTag {
-                    tagMatches.append(" ".join(wordsToConsider))
+                    tagMatches.append(wordsToConsider.joinWithSeparator(" "))
                     wordsToConsider.removeAll(keepCapacity: false)
                     outerCounter = outerCounter + wordCount - 1
                 }
@@ -83,13 +83,13 @@ class TagParser: NSObject {
     private func locationForTagsInText(tagList: [String], text: String) -> [NSRange] {
         var ranges: [NSRange] = []
         for tag in tagList {
-            var range = NSRange(location: 0, length: count(text))
+            var range = NSRange(location: 0, length: text.characters.count)
             while (range.location != NSNotFound) {
                 let tagPattern = "\\b\(tag)\\b" //regular expression - word boundary of tag
                 range = (text.lowercaseString as NSString).rangeOfString(tagPattern, options: .RegularExpressionSearch, range: range)
                 if (range.location != NSNotFound) {
                     ranges.append(range)
-                    range = NSRange(location: range.location + range.length, length: count(text) - (range.location + range.length))
+                    range = NSRange(location: range.location + range.length, length: text.characters.count - (range.location + range.length))
                 }
             }
         }
@@ -109,7 +109,7 @@ extension String {
     }
     
     func stripSpecialCharacters() -> String {
-        return " ".join(self.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet)).lowercaseString
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator(" ").lowercaseString
     }
     
     func componentsSeparatedByWhiteSpace() -> [String] {
@@ -117,6 +117,6 @@ extension String {
     }
     
     func trimExtraWhiteSpace() -> String {
-        return " ".join(self.componentsSeparatedByWhiteSpace().filter({!$0.isEmpty}))
+        return self.componentsSeparatedByWhiteSpace().filter({!$0.isEmpty}).joinWithSeparator(" ")
     }
 }

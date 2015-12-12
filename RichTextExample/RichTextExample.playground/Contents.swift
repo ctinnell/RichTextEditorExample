@@ -8,7 +8,7 @@ extension String {
     }
     
     func stripSpecialCharacters() -> String {
-        return " ".join(self.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet)).lowercaseString
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator(" ").lowercaseString
     }
     
     func componentsSeparatedByWhiteSpace() -> [String] {
@@ -16,7 +16,7 @@ extension String {
     }
     
     func trimExtraWhiteSpace() -> String {
-        return " ".join(self.componentsSeparatedByWhiteSpace().filter({!$0.isEmpty}))
+        return self.componentsSeparatedByWhiteSpace().filter({!$0.isEmpty}).joinWithSeparator(" ")
     }
 }
 
@@ -37,18 +37,18 @@ tags = ["how are you", "you", "weather", "how are you doing", "Hello"]
 
 func isStringATag(text: String) -> (Bool, Int) {
     let tag = tags!.filter({$0.lowercaseString == text})
-    let isTag = count(tag) > 0
+    let isTag = tag.count > 0
     var numberOfWords = 0
     
     if isTag {
         let components = text.componentsSeparatedByWhiteSpace()
-        numberOfWords = count(components)
+        numberOfWords = components.count
     }
     return (isTag,numberOfWords)
 }
 
 
-println(maxTagLength)
+print(maxTagLength)
 
 
 let strArray = str.stripSpecialCharacters().trimExtraWhiteSpace().componentsSeparatedByWhiteSpace()
@@ -63,13 +63,13 @@ for (var outerCounter = 0; outerCounter<strArray.count; outerCounter++) {
         wordsToConsider.append(strArray[innerCounter])
     }
     
-    println(wordsToConsider)
+    print(wordsToConsider)
     
     var y = 0
     while wordsToConsider.count > 0 {
-        let (isTag, wordCount) = isStringATag(" ".join(wordsToConsider))
+        let (isTag, wordCount) = isStringATag(wordsToConsider.joinWithSeparator(" "))
         if isTag {
-            tagMatches.append(" ".join(wordsToConsider))
+            tagMatches.append(wordsToConsider.joinWithSeparator(" "))
             wordsToConsider.removeAll(keepCapacity: false)
             outerCounter = outerCounter + wordCount - 1
         }

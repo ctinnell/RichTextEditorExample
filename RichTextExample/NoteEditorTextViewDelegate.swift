@@ -23,15 +23,15 @@ class NoteEditorTextViewDelegate: NSObject {
     func formatTextView() {
         let cursorLocation = textView.selectedRange
 
-        let lowercaseText = textView.text.lowercaseString
-        var attributedText = NSMutableAttributedString(string: textView.text)
+        //let lowercaseText = textView.text.lowercaseString
+        let attributedText = NSMutableAttributedString(string: textView.text)
         
         if let tagParser = tagParser {
             let (tags, locations) = tagParser.parseTags(textView.text)
             for location in locations {
                 attributedText.addAttributes([NSForegroundColorAttributeName: UIColor.blueColor(),
                     NSBackgroundColorAttributeName: UIColor.yellowColor(),
-                    NSFontAttributeName: textView.font,
+                    NSFontAttributeName: textView.font!,
                     NSUnderlineStyleAttributeName: 1], range: location)
             }
         }

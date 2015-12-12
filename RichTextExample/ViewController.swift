@@ -18,14 +18,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tagListTextField.addTarget(self, action: "tagTextFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
         if let tagParser = noteEditorTextFieldDelegate.tagParser {
-            tagListTextField.text = ",".join(tagParser.tags)
+            tagListTextField.text = tagParser.tags.joinWithSeparator(",")
         }
         
     }
     
     func tagTextFieldChanged(sender:UITextField) {
         if let tagParser = noteEditorTextFieldDelegate.tagParser {
-            tagParser.tags = tagListTextField.text.componentsSeparatedByString(",")
+            tagParser.tags = tagListTextField.text?.componentsSeparatedByString(",") ?? []
             noteEditorTextFieldDelegate.formatTextView()
         }
     }
